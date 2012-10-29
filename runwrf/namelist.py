@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 '''
-  Read and manipulate the Fortran namelist files
+  Read and manipulate the Fortran namelist files. Regexp based parsing.
 
   Fotran namelist files are in the following pattern.
 
@@ -24,28 +24,47 @@ AUTHOR = "Yagnesh Raghava Yakkala"
 WEBSITE = "http://yagnesh.org"
 LICENSE ="GPL v3 or later"
 
+
+import re
+
 class NameList(dict):
     """Read and Keep the Fortran namelist files.
     """
 
     def __init__(self, namelistfile):
         """
-
         Arguments:
-        - `namelistfile`:
+        - `namelistfile`: file
         """
         dict.__init__(self)
         self._namelistfile = namelistfile
         self._fileContent = open(namelistfile).read()
-        self.
+        self.update(self.parse())
 
-    def print_raw_content(self):
-        return self._fileContent
+    def parse(self):
+        # re patterns
+        varstring = r'\b[a-zA-Z][a-zA-Z0-9_]*\b'
+        spaces = r'[\t\s]*'
+
+        sectname = re.compile(r"^[\t\s]*&(" + varstring + r")[\t\s]*$")
+        sectend = re.compile(r"^[\t\s]*/[\t\s]*$")
+
+        nl = {}                 # this is going to returned
+        sect= ''
+
+        for line in self._fileContent.split("\n+"):
+            if re.match(secname,line):
+                sect = re.sub(secname,r"\1",line)
+                nl[sect] = {
+                    'raw' : [],
+                    'par' : [{}]
+                }
+            elif re.match(re.sub)
 
 
 def main():
-    pass
-
+    nl = NameList("./namelist.input")
+    print "\n".join(nl)
 
 if __name__ == '__main__':
     main()
