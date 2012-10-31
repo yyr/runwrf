@@ -17,7 +17,7 @@ setup(
     author_email='hi@yagnesh.org',
     license=runwrf.LICENSE,
     url='http://github.com/yyr/runwrf',
-    keywords='WRF, weather Research, Model'
+    keywords='WRF, weather Research, Model',
     long_description = runwrf.__doc__,
     classifiers=[
         'Development Status :: 3 - Alpha',
