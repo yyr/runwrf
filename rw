@@ -4,11 +4,6 @@
 
 '''
 
-DATE = "Sunday, May 13 2012"
-AUTHOR = "Yagnesh Raghava Yakkala"
-WEBSITE = "http://yagnesh.org"
-LICENSE ="GPL v3 or later"
-
 import os
 import sys
 import inspect
