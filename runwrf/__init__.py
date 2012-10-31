@@ -1,20 +1,16 @@
-'''
-Run WRF Model with out model any crud.
-Automate data downloading, running WPS, manipulating namelist, real and more.
+# [[[cog
+# from cog import out
+# out('"""\n{0}\n"""'.format(file('../README.rst').read()))
+# ]]]
+"""
+Run WRF Model with out crud
 
-* `
-
-Install
--------
-
-Usage
------
-
-'''
+"""
+# [[[end]]]
 
 DATE = "Sunday, May 13 2012"
 AUTHOR = "Yagnesh Raghava Yakkala"
-WEBSITE = "http://yagnesh.org"
+WEBSITE = "http://github.com/yyr/runwrf"
 LICENSE ="GPL v3 or later"
 VERSION = "0.1-dev0"
 
