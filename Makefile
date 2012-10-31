@@ -12,4 +12,7 @@ doc: cog
 cog:
 	cd runwrf && cog.py -r __init__.py
 
+test:
+	echo "No tests written yet"
+
 .PHONY : test doc clean install
