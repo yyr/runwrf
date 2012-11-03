@@ -3,7 +3,9 @@
 # out('"""\n{0}\n"""'.format(file('../README.rst').read()))
 # ]]]
 """
-Run WRF Model with out crud
+Run WRF Model with out any crud
+
+Note: in early development stage, not usable
 
 """
 # [[[end]]]
