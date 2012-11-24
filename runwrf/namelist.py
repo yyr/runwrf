@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 '''
-  Read and manipulate the Fortran namelist files. Regexp based parsing.
+Read and manipulate the Fortran namelist files. Regexp based parsing.
 
-  Fotran namelist files are in the following pattern.
+Fotran namelist files are in the following pattern.
 
-________________________________________________________________
      &section1
         par = val
         par2 = val,val2
@@ -16,9 +15,10 @@ ________________________________________________________________
         par4 = val,val2
         ...
      /
-________________________________________________________________
 
 '''
+
+import codecs
 
 AUTHOR = "Yagnesh Raghava Yakkala"
 WEBSITE = "http://yagnesh.org"
@@ -31,14 +31,14 @@ class NameList(dict):
     """Read and Keep the Fortran namelist files.
     """
 
-    def __init__(self, namelistfile):
+    def __init__(self,lines,filename="<undefined>"):
         """
         Arguments:
         - `namelistfile`: file
         """
         dict.__init__(self)
-        self._namelistfile = namelistfile
-        self._fileContent = open(namelistfile).read()
+        self._filename = filename
+        self._lines = lines
         self.update(self.parse())
 
     def parse(self):
@@ -52,19 +52,60 @@ class NameList(dict):
         nl = {}                 # this is going to returned
         sect= ''
 
-        for line in self._fileContent.split("\n+"):
+        for line in self._lines.split("\n+"):
             if re.match(secname,line):
                 sect = re.sub(secname,r"\1",line)
                 nl[sect] = {
                     'raw' : [],
                     'par' : [{}]
                 }
-            elif re.match(re.sub)
+            elif re.match(re.sub):
+                pass
+
+
+
+def parse_lines(lines,filename):
+    """
+
+    """
+    return Namelist(lines,filename=filename)
+
+def load(path):
+    """
+    Load namelist from a file.
+
+    :type path: str
+    :type arg: namelist file path
+
+    """
+    namelistfile = codecs.open(path,encoding='utf8')
+    filename = path
+    return loadi((l.rstrip('\n' for l in namelistfile.readlines())),
+                 filename=filename)
+
+
+def loads(string, filename='<string>'):
+    """
+    Load namelist document from a string.
+
+    :rtype: :class: runwrf.Namelist
+    """
+    return loadi(string.splitlines(),filename=filename)
+
+
+def loadi(lines,filename='<lines>'):
+    """
+    Load configuration file.
+
+    :type path: str or file-like.
+    """
+    return parse_lines(lines, filename=filename)
 
 
 def main():
     nl = NameList("./namelist.input")
     print "\n".join(nl)
+
 
 if __name__ == '__main__':
     main()
