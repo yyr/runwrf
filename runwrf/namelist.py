@@ -27,14 +27,14 @@ LICENSE ="GPL v3 or later"
 
 import re
 
-class NameList(dict):
+class Namelist(dict):
     """Read and Keep the Fortran namelist files.
     """
 
     def __init__(self,lines,filename="<undefined>"):
         """
-        Arguments:
-        - `namelistfile`: file
+        Create a :class:`Namelist` object.
+
         """
         dict.__init__(self)
         self._filename = filename
@@ -68,14 +68,14 @@ def parse_lines(lines,filename):
     """
 
     """
-    return NameList(lines,filename=filename)
+    return Namelist(lines,filename=filename)
 
 def load(path):
     """
     Load namelist from a file.
 
     :type path: str
-    :type arg: namelist file path
+    :type path: namelist file path
 
     """
     namelistfile = codecs.open(path,encoding='utf8')
@@ -88,7 +88,7 @@ def loads(string, filename='<string>'):
     """
     Load namelist document from a string.
 
-    :rtype: :class: runwrf.NameList
+    :rtype: :class: runwrf.Namelist
     """
     return loadi(string.splitlines(),filename=filename)
 
