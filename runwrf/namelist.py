@@ -52,17 +52,22 @@ class Namelist(dict):
         nl = {}                 # this is going to returned
         sect= ''
 
-        for line in self._lines.split("\n+"):
-            if re.match(secname,line):
-                sect = re.sub(secname,r"\1",line)
+        # split sections
+        for line in [l.strip() for l in self._lines if not l.strip() == '']: # remove empty lines
+            # print line
+            if re.match(sectname,line):
+                sect = re.sub(sectname,r"\1",line)
                 nl[sect] = {
                     'raw' : [],
                     'par' : [{}]
                 }
-            elif re.match(re.sub):
-                pass
+            elif re.match(sectend,line):
+                sect = ''
+            else:
+                if sectname:
+                    nl[sect]['raw'].append(line)
 
-
+        return nl
 
 def parse_lines(lines,filename):
     """
@@ -101,10 +106,11 @@ def loadi(lines,filename='<lines>'):
     """
     return parse_lines(lines, filename=filename)
 
-
 def main():
-    return load("./namelist.input")
-
+    """ path to namelist file
+    """
+    path = "namelist.input"
+    return load(path)
 
 if __name__ == '__main__':
     main()
