@@ -68,7 +68,7 @@ def parse_lines(lines,filename):
     """
 
     """
-    return Namelist(lines,filename=filename)
+    return NameList(lines,filename=filename)
 
 def load(path):
     """
@@ -80,7 +80,7 @@ def load(path):
     """
     namelistfile = codecs.open(path,encoding='utf8')
     filename = path
-    return loadi((l.rstrip('\n' for l in namelistfile.readlines())),
+    return loadi((l.rstrip('\n') for l in namelistfile.readlines()),
                  filename=filename)
 
 
@@ -88,7 +88,7 @@ def loads(string, filename='<string>'):
     """
     Load namelist document from a string.
 
-    :rtype: :class: runwrf.Namelist
+    :rtype: :class: runwrf.NameList
     """
     return loadi(string.splitlines(),filename=filename)
 
@@ -103,8 +103,7 @@ def loadi(lines,filename='<lines>'):
 
 
 def main():
-    nl = NameList("./namelist.input")
-    print "\n".join(nl)
+    return load("./namelist.input")
 
 
 if __name__ == '__main__':
