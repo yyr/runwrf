@@ -47,13 +47,20 @@ class Namelist(dict):
         """
         Raw lines of Namelist file(s).
 
+        >>> from runwrf import namelist
+        >>> namelist.loads("").lines
+        []
+
         """
         return self._lines
 
 
     def pprint(self):
-        "Pretty print namelist"
+        """
+        Pretty print namelist
+        """
         pass
+
 
     def _split_namelist_line(self,string):
         """ split a namelist line into parameter and values.
@@ -61,8 +68,7 @@ class Namelist(dict):
         """
         par = []
         val = []
-        pass
-
+        return [par,val]
 
     def parse(self):
         # re patterns

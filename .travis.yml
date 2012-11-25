@@ -4,4 +4,4 @@ before_install:
 
 script:
   - python --version
-  - make test
+  - nosetests --with-doctest runwrf
