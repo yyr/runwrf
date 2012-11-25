@@ -41,6 +41,29 @@ class Namelist(dict):
         self._lines = lines
         self.update(self.parse())
 
+
+    @property
+    def lines(self):
+        """
+        Raw lines of Namelist file(s).
+
+        """
+        return self._lines
+
+
+    def pprint(self):
+        "Pretty print namelist"
+        pass
+
+    def _split_namelist_line(self,string):
+        """ split a namelist line into parameter and values.
+
+        """
+        par = []
+        val = []
+        pass
+
+
     def parse(self):
         # re patterns
         varstring = r'\b[a-zA-Z][a-zA-Z0-9_]*\b'
@@ -67,6 +90,11 @@ class Namelist(dict):
                 if sectname:
                     nl[sect]['raw'].append(line)
 
+
+        # sections to parameters
+        for sect in nl.keys():
+            for line in self._split_namelist_line(nl[sect]['raw']):
+                pass
         return nl
 
 def parse_lines(lines,filename):
