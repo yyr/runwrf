@@ -18,13 +18,11 @@ Fotran namelist files are in the following pattern.
 
 '''
 
-import codecs
-
 AUTHOR = "Yagnesh Raghava Yakkala"
 WEBSITE = "http://yagnesh.org"
 LICENSE ="GPL v3 or later"
 
-
+import codecs
 import re
 
 class Namelist(dict):
@@ -64,6 +62,20 @@ class Namelist(dict):
 
         return self._lines
 
+    @lines.setter
+    def lines(self,lns):
+        """
+        Append to namelist
+
+        >>> from runwrf import namelist
+        >>> a = namelist.loads('''&time \n a = abc \n /''')
+        >>> a.lines = ["abc"]
+        >>> a
+
+        """
+        self._lines = self._lines + lns
+        self.update(self.parse(lns))
+
 
     def pprint(self):
         """
@@ -78,9 +90,11 @@ class Namelist(dict):
         """
         par = []
         val = []
+
         return [par,val]
 
-    def parse(self):
+    def parse(self, lns=None):
+        if lns is None: lns = self._lines
         # re patterns
         varstring = r'\b[a-zA-Z][a-zA-Z0-9_]*\b'
         spaces = r'[\t\s]*'
@@ -92,7 +106,7 @@ class Namelist(dict):
         sect= ''
 
         # split sections
-        for line in [l.strip() for l in self._lines if not l.strip() == '']: # remove empty lines
+        for line in [l.strip() for l in lns if not l.strip() == '']: # remove empty lines
             # print line
             if re.match(sectname,line):
                 sect = re.sub(sectname,r"\1",line)
@@ -111,6 +125,7 @@ class Namelist(dict):
         for sect in nl.keys():
             for line in self._split_namelist_line(nl[sect]['raw']):
                 pass
+
         return nl
 
 def parse_lines(lines,filename):
