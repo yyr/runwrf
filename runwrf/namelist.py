@@ -51,7 +51,17 @@ class Namelist(dict):
         >>> namelist.loads("").lines
         []
 
+        >>> namelist.loads('''
+        ... &time
+        ... abc = a, b, c
+        ... /
+        ... &domain
+        ... efg = e, f, ,
+        ... /
+        ... ''').lines
+        ['', '&time', 'abc = a, b, c', '/', '&domain', 'efg = e, f, ,', '/']
         """
+
         return self._lines
 
 
